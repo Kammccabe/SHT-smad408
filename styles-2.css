@@ -1,0 +1,272 @@
+/* The Copper Table: centered restaurant site */
+
+
+
+  .carousel {
+    position: relative;
+    width: min(90vw, 800px);
+  margin-inline: auto;    /* centers it horizontally */
+}
+  
+
+  /* The scrolling track: each slide snaps into place */
+  .slides {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    border-radius: 12px;
+    scrollbar-width: none;           /* hide scrollbar (Firefox) */
+  }
+  .slides::-webkit-scrollbar { display: none; }  /* hide scrollbar (Chrome/Safari) */
+
+  .slide {
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+    margin: 0;
+    position: relative;
+  }
+
+  .slide img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .slide figcaption {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 2rem 1rem 0.75rem;
+    color: #fff;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
+  }
+
+  /* Dot navigation (anchor links jump to each slide) */
+  .dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+  }
+  .dots a {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #bbb;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .dots a:hover,
+  .dots a:focus-visible {
+    background: #333;
+    transform: scale(1.2);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .slides { scroll-behavior: auto; }
+  }
+
+:root {
+  --ink: #0d2d25;        /* deep green, text and header */
+  --sage: #e6ebe3;       /* page background */
+  --sage-deep: #d3dccf;  /* alternate sections */
+  --copper: #b8662d;     /* accent */
+  --copper-dark: #944f20;
+  --paper: #ffffff;
+
+  --font-display: "Young Serif", Georgia, "Times New Roman", serif;
+  --font-body: "Karla", "Helvetica Neue", Arial, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--sage);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  line-height: 1.7;
+  text-align: center;          /* centers all text on the site */
+}
+
+a { color: var(--copper-dark); }
+a:hover { color: var(--copper); }
+
+:focus-visible {
+  outline: 3px solid var(--copper);
+  outline-offset: 3px;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.15;
+  margin: 0 0 0.6em;
+}
+
+h1 { font-size: clamp(2.5rem, 1.5rem + 5vw, 4.75rem); }
+h2 { font-size: clamp(1.9rem, 1.4rem + 2vw, 2.75rem); }
+h3 { font-size: 1.6rem; color: var(--copper-dark); }
+h4 { font-size: 1.2rem; margin-bottom: 0.2em;  }
+
+p { max-width: 38rem; margin: 0 auto 1rem; }
+
+/* Header and navigation */
+
+.site-header {
+  background: var(--ink);
+  color: var(--sage);
+  padding: 1.25rem 1rem 1rem;
+}
+
+.logo {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--sage);
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25rem 1.75rem;
+}
+
+nav a {
+  color: var(--sage);
+  text-decoration: none;
+  padding: 0.25rem 0;
+  border-bottom: 2px solid transparent;
+}
+
+nav a:hover {
+  color: #f0b27f;
+  border-bottom-color: #f0b27f;
+}
+
+/* Hero */
+
+.hero {
+  background: var(--ink);
+  color: var(--sage);
+  padding: clamp(4rem, 12vw, 9rem) 1.25rem;
+}
+
+.hero h1 {
+  max-width: 14ch;
+  margin-inline: auto;
+  text-wrap: balance;
+}
+
+.hero p {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.button {
+  display: inline-block;
+  background: var(--copper);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.85rem 2rem;
+  border-radius: 999px;
+  transition: background 0.15s ease;
+}
+
+.button:hover { background: var(--copper-dark); color: #fff; }
+
+/* Sections */
+
+.section {
+  padding: clamp(3rem, 8vw, 6rem) 1.25rem;
+}
+
+.section-alt { background: var(--sage-deep); }
+
+/* Menu */
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem 2rem;
+  max-width: 68rem;
+  margin: 2.5rem auto 0;
+}
+
+.dish {
+  background: var(--paper);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.dish p {
+  margin: 0 auto 0.4rem;
+  font-size: 1rem;
+}
+
+.price {
+  font-weight: 600;
+  color: var(--copper-dark);
+}
+
+/* Hours and contact */
+
+.hours {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+}
+
+.hours li { margin-bottom: 0.5rem; }
+
+.hours strong {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 400;
+}
+
+address { font-style: normal; }
+
+.contact-line {
+  font-size: 1.35rem;
+  margin-bottom: 0.4rem;
+}
+
+/* Footer */
+
+.site-footer {
+  background: var(--ink);
+  color: var(--sage);
+  padding: 2rem 1rem;
+  font-size: 0.95rem;
+}
+
+.site-footer p { margin-bottom: 0.5rem; }
+.site-footer a { color: #f0b27f; }
+
+/* Tablet and phone */
+
+@media (max-width: 860px) {
+  .menu-grid {
+    grid-template-columns: 1fr;
+    max-width: 30rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}
+
+ 
